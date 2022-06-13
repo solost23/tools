@@ -5,7 +5,6 @@ package readFile
 import (
 	"encoding/csv"
 	"errors"
-	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -29,12 +28,12 @@ func (r *ReadFile) ReadFile() (res [][]string, err error) {
 }
 
 func (r *ReadFile) readFileCsv() (res [][]string, err error) {
-	pathAbs, err := os.Getwd()
-	if err != nil {
-		return res, err
-	}
-	filePath := fmt.Sprintf("%s/%s", pathAbs, r.FileName)
-	fp, err := os.Open(filePath)
+	//pathAbs, err := os.Getwd()
+	//if err != nil {
+	//	return res, err
+	//}
+	//filePath := fmt.Sprintf("%s/%s", pathAbs, r.FileName)
+	fp, err := os.Open(r.FileName)
 	if err != nil {
 		return
 	}
@@ -57,12 +56,12 @@ func (r *ReadFile) readFileCsv() (res [][]string, err error) {
 }
 
 func (r *ReadFile) readFileExcel() (res [][]string, err error) {
-	pathAbs, err := os.Getwd()
-	if err != nil {
-		return res, err
-	}
-	filePath := fmt.Sprintf("%s/%s", pathAbs, r.FileName)
-	fp, err := excelize.OpenFile(filePath)
+	//pathAbs, err := os.Getwd()
+	//if err != nil {
+	//	return res, err
+	//}
+	//filePath := fmt.Sprintf("%s/%s", pathAbs, r.FileName)
+	fp, err := excelize.OpenFile(r.FileName)
 	if err != nil {
 		return res, err
 	}
