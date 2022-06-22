@@ -3,6 +3,8 @@ package minio_storage
 import (
 	"context"
 	"log"
+	"net/url"
+	"time"
 
 	"github.com/minio/minio-go"
 )
@@ -42,4 +44,13 @@ func FileUpload(ctx context.Context, minioClient *minio.Client, bucketName strin
 func FileDownload(ctx context.Context, minioClient *minio.Client, bucketName string, objectName string, filePath string) (err error) {
 	err = minioClient.FGetObjectWithContext(ctx, bucketName, objectName, filePath, minio.GetObjectOptions{})
 	return err
+}
+
+// 生成对象的url
+func GetFileUrl(_ context.Context, minioClient *minio.Client, bucketName string, objectName string, expire time.Duration, request url.Values) (url string, err error) {
+	urlObject, err := minioClient.PresignedGetObject(bucketName, objectName, expire, request)
+	if err != nil {
+		return "", err
+	}
+	return urlObject.String(), nil
 }
