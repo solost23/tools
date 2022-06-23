@@ -1,0 +1,33 @@
+{
+    "name": "article",
+    "storage_type": "disk",
+    "mappings": {
+        "properties": {
+            "title": {
+                "type": "text",
+                "index": true,
+                "store": true,
+                "highlightable": true
+            },
+            "content": {
+                "type": "text",
+                "index": true,
+                "store": true,
+                "highlightable": true
+            },
+            "status": {
+                "type": "keyword",
+                "index": true,
+                "sortable": true,
+                "aggregatable": true
+            },
+            "publish_date": {
+                "type": "date",
+                "format": "2006-01-02T15:04:05Z07:00",
+                "index": true,
+                "sortable": true,
+                "aggregatable": true
+            }
+        }
+    }
+}
